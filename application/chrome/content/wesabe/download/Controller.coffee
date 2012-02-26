@@ -13,6 +13,12 @@ inspect = require 'util/inspect'
 {EventEmitter} = require 'events2'
 {tryCatch, tryThrow} = require 'util/try'
 
+# required for fid_list
+Player  = require 'download/Player'
+OFXPlayer = require 'download/OFXPlayer'
+CompoundPlayer = require 'download/CompoundPlayer'
+Colorizer = require 'util/Colorizer'
+
 class Controller
   createServerSocket: ->
     Cc['@mozilla.org/network/server-socket;1'].createInstance(Ci.nsIServerSocket)
@@ -238,6 +244,44 @@ class Controller
       respond response:
                 status: 'error'
                 error: "No statement found with id=#{data}"
+
+  fid_list: (data, respond) ->
+    fi_scripts = Dir.root.child('application').child('chrome').child('content').child('wesabe').child('fi-scripts')
+    index = fi_scripts.path.length + 1
+    fid_list = []
+    
+    String.prototype.repeat = (num) ->
+      buf = ""
+      buf += this for i in [0..num]
+      return buf
+    
+    for file in fi_scripts.children(true)
+      if !file.isDirectory
+        fid = file.path.substr(index).match(/(.*)\.(?:js|coffee)/)[1].replace(/\//g, '.')
+        hash = {'fid': fid}
+        try
+          klass = wesabe.require "fi-scripts.#{fid}"
+          continue unless typeof klass is 'function'
+          
+          player = new klass(fid)
+          hash['status'] = 'ok'
+          hash['org'] = player.org
+        catch e
+          logger.error e
+          hash['status'] = 'broken'
+        fid_list.push(hash)
+    
+    for fid in fid_list
+      status = if fid["status"] == "ok" then Colorizer.green("OK") else Colorizer.red("BROKEN")
+      logger.info fid["fid"] + " ".repeat(40 - fid["fid"].length) + status
+    
+    fid_list = for fid in fid_list when fid['status'] == 'ok'
+      delete fid['status']
+      fid
+    
+    respond response:
+             status: 'ok'
+             fid_list: fid_list
 
   job_stop: (data, respond) ->
     logger.info 'Got request to stop job, shutting down'
