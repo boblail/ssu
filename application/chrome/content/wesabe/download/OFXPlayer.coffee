@@ -6,11 +6,13 @@ privacy = require 'util/privacy'
 {sharedEventEmitter} = require 'events2'
 
 Request = require 'ofx/Request'
+Player = require 'download/Player'
 
 # public methods
 
-class OFXPlayer
+class OFXPlayer extends Player
   DAYS_OF_HISTORY: 365
+  afterDownloadCallbacks: []
 
   @register: (params) ->
     klass = @create params
@@ -31,6 +33,7 @@ class OFXPlayer
   #
   start: (creds) ->
     @creds = creds
+    @listenForDownloads()
     @beginGetAccounts()
 
   #

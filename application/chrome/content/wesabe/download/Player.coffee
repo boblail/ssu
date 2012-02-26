@@ -152,39 +152,9 @@ class Player extends EventEmitter
     browser.addEventListener 'DOMContentLoaded', (evt) =>
       @onDocumentLoaded Browser.wrap(browser), Page.wrap(evt.target)
     , no
-
-    sharedEventEmitter.on 'downloadSuccess', (data, suggestedFilename, contentType) =>
-      @job.update 'account.download.success'
-      @setErrorTimeout 'global'
-
-      tryThrow 'Player#downloadSuccess', (log) =>
-        folder = Dir.profile.child('statements')
-        unless folder.exists
-          folder.create()
-
-        statement = folder.child(uuid()).asFile
-        statement.write data
-
-        metadata = @job.nextDownloadMetadata or {}
-        delete @job.nextDownloadMetadata
-
-        # restore the browser and page the download was triggered from, if any
-        if metadata.browser
-          @browser = metadata.browser
-          delete metadata.browser
-        if metadata.page
-          @page = metadata.page
-          delete metadata.page
-
-        @job.recordSuccessfulDownload statement, extend({suggestedFilename, contentType}, metadata)
-        @onDownloadSuccessful @browser, @page
-
-    sharedEventEmitter.on 'downloadFail', =>
-      logger.warn 'Failed to download a statement! This is bad, but a failed job is worse, so we press on'
-      @job.update 'account.download.failure'
-      @setErrorTimeout 'global'
-      @onDownloadSuccessful @browser, @page
-
+    
+    @listenForDownloads()
+    
     @setErrorTimeout 'global'
     # start the security question timeout when the job is suspended
     @job.on 'suspend', =>
@@ -198,6 +168,39 @@ class Player extends EventEmitter
 
     @answers = answers
     @runAction 'main', Browser.wrap(browser)
+  
+  listenForDownloads: ->
+    sharedEventEmitter.on 'downloadSuccess', (data, suggestedFilename, contentType) =>
+      @job.update 'account.download.success'
+      @setErrorTimeout 'global'
+      
+      tryThrow 'Player#downloadSuccess', (log) =>
+        folder = Dir.profile.child('statements')
+        unless folder.exists
+          folder.create()
+        
+        statement = folder.child(uuid()).asFile
+        statement.write data
+        
+        metadata = @job.nextDownloadMetadata or {}
+        delete @job.nextDownloadMetadata
+        
+        # restore the browser and page the download was triggered from, if any
+        if metadata.browser
+          @browser = metadata.browser
+          delete metadata.browser
+        if metadata.page
+          @page = metadata.page
+          delete metadata.page
+        
+        @job.recordSuccessfulDownload statement, extend({suggestedFilename, contentType}, metadata)
+        @onDownloadSuccessful @browser, @page
+    
+    sharedEventEmitter.on 'downloadFail', =>
+      logger.warn 'Failed to download a statement! This is bad, but a failed job is worse, so we press on'
+      @job.update 'account.download.failure'
+      @setErrorTimeout 'global'
+      @onDownloadSuccessful @browser, @page
 
   nextGoal: ->
     @job.nextGoal()
