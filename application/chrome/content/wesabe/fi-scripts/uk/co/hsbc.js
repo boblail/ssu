@@ -1,6 +1,12 @@
 wesabe.download.Player.register({
   fid: 'uk.co.hsbc',
   org: 'HSBC Bank (UK)',
+  
+  loginFields: [
+    {'label': 'Internet Banking user ID', 'type': 'text', 'key': 'username'},
+    {'label': 'Your Date of Birth (ddmmyy)', 'type': 'password', 'key': 'memorable'},
+    {'label': 'Security Number', 'type': 'password', 'key': 'password'}
+  ],
 
   dispatchFrames: false,
   afterDownload: 'nextAccount',

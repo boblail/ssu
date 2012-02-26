@@ -4,6 +4,11 @@
 wesabe.download.Player.register({
   fid: 'com.tdcanadatrust',
   org: 'TD Canada Trust',
+  
+  loginFields: [
+    {'label': 'Access Card', 'type': 'text', 'key': 'username'},
+    {'label': 'Web Password', 'type': 'password', 'key': 'password'}
+  ],
 
   // TD Canada Trust uses frames
   dispatchFrames: true,

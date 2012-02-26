@@ -1,6 +1,11 @@
 wesabe.download.CompoundPlayer.register
   fid: 'com.chase'
   org: 'Chase'
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'}
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ]
 
   players: [
     wesabe.download.OFXPlayer.create

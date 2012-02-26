@@ -1,6 +1,11 @@
 wesabe.download.OFXPlayer.register
   fid: 'com.citicards'
-  org: 'Citicards'
+  org: 'Citi Cards'
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'}
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ]
 
   fi:
     ofxFid: '24909'

@@ -1,6 +1,11 @@
 wesabe.download.Player.register({
   fid: 'com.nationalcity',
   org: 'National City - Online Banking',
+  
+  loginFields: [
+    {'label': 'Log-in ID', 'type': 'text', 'key': 'username'},
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ],
 
   dispatchFrames: false,
   afterDownload: 'nextAccount',

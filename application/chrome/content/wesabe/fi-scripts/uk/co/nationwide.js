@@ -1,6 +1,12 @@
 wesabe.download.OFXPlayer.register({
   fid: 'uk.co.nationwide',
   org: 'Nationwide (UK)',
+  
+  loginFields: [
+    {'label': 'Customer Number', 'type': 'text', 'key': 'username'},
+    {'label': 'Passnumber', 'type': 'password', 'key': 'password'},
+    {'label': 'Memorable Data', 'type': 'password', 'key': 'memorable'}
+  ],
 
   get creds() {
     return this.__creds__;

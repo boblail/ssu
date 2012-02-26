@@ -1,6 +1,12 @@
 wesabe.download.Player.register({
   fid: 'com.vancity',
   org: 'Vancity',
+  
+  loginFields: [
+    {'label': 'Branch', 'type': 'text', 'key': 'branch'},
+    {'label': 'Account Number', 'type': 'text', 'key': 'username'},
+    {'label': 'Personal Access Code (PAC)', 'type': 'password', 'key': 'password'}
+  ],
 
   // change to true if frames have meaningful content,
   // and that "dispatch" should be run for the document

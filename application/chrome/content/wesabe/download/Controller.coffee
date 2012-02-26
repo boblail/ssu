@@ -266,6 +266,7 @@ class Controller
           player = new klass(fid)
           hash['status'] = 'ok'
           hash['org'] = player.org
+          hash['loginFields'] = player.loginFields
         catch e
           logger.error e
           hash['status'] = 'broken'
@@ -273,6 +274,7 @@ class Controller
     
     for fid in fid_list
       status = if fid["status"] == "ok" then Colorizer.green("OK") else Colorizer.red("BROKEN")
+      status += " *" if fid["loginFields"]
       logger.info fid["fid"] + " ".repeat(40 - fid["fid"].length) + status
     
     fid_list = for fid in fid_list when fid['status'] == 'ok'

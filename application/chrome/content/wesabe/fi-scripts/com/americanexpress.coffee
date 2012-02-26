@@ -1,6 +1,11 @@
 (require "download/CompoundPlayer").register
   fid: "com.americanexpress"
   org: "American Express Cards"
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'}
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ]
 
   players: [
     (require "download/Player").create(

@@ -5,6 +5,11 @@ Player         = require 'download/Player'
 CompoundPlayer.register
   fid: 'com.ingdirect'
   org: 'ING Direct'
+  
+  loginFields: [
+    {'label': 'Customer Number or Saver ID', 'type': 'text', 'key': 'username'}
+    {'label': 'Login PIN', 'type': 'password', 'key': 'password'}
+  ]
 
   players: [
     OFXPlayer.create

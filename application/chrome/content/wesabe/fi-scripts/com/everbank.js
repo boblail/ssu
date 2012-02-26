@@ -1,6 +1,11 @@
 wesabe.download.Player.register({
   fid: 'com.everbank',
   org: 'EverBank',
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'},
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ],
 
   dispatchFrames: false,
   afterDownload: 'logout',

@@ -2,6 +2,11 @@ wesabe.provide 'fi-scripts.com.schwab.bank',
   class bank extends wesabe.download.OFXPlayer
     fid: 'com.schwab.bank'
     org: 'Charles Schwab Bank, N.A.'
+    
+    loginFields: [
+      {'label': 'Schwab.com Login ID', 'type': 'text', 'key': 'username'}
+      {'label': 'Password', 'type': 'password', 'key': 'password'}
+    ]
 
     fi:
       ofxFid: '101'

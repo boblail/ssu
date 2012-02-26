@@ -1,6 +1,11 @@
 wesabe.download.Player.register({
   fid: 'com.wachovia',
   org: 'Wachovia',
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'},
+    {'label': 'Password', 'type': 'password', 'key': 'password'}
+  ],
 
   afterDownload: 'logout',
 

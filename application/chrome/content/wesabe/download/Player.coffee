@@ -46,12 +46,16 @@ class Player extends EventEmitter
       # ofx info in case this is a hybrid
       @ofx: params.ofx
 
+      # what information does the user need to supply to authenticate?
+      @loginFields: params.loginFields
+
       # the elements we need to recognize
       @elements: {}
 
       # pass .fid and .org through to the class
       @::__defineGetter__ 'fid', -> @constructor.fid
       @::__defineGetter__ 'org', -> @constructor.org
+      @::__defineGetter__ 'loginFields', -> @constructor.loginFields
 
       canHandleGoal: params.canHandleGoal or (-> true)
 

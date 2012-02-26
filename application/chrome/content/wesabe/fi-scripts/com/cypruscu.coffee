@@ -2,6 +2,11 @@ wesabe.provide 'fi-scripts.com.cypruscu',
   class cypruscu extends wesabe.download.OFXPlayer
     fid: 'com.cypruscu'
     org: 'Cyprus Federal Credit Union'
+    
+    loginFields: [
+      {'label': 'Log-in ID', 'type': 'text', 'key': 'username'}
+      {'label': 'Password', 'type': 'password', 'key': 'password'}
+    ]
 
     DAYS_OF_HISTORY: 30
 

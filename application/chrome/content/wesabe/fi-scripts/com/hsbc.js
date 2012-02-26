@@ -1,6 +1,12 @@
 wesabe.download.Player.register({
   fid: 'com.hsbc',
   org: 'HSBC (US)',
+  
+  loginFields: [
+    {'label': 'User ID', 'type': 'text', 'key': 'username'},
+    {'label': 'Password', 'type': 'password', 'key': 'password'},
+    {'label': 'Security Key', 'type': 'password', 'key': 'securityKey'}
+  ],
 
   dispatchFrames: false,
   afterDownload: 'nextAccount',

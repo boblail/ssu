@@ -1,6 +1,11 @@
 wesabe.download.Player.register({
   fid: 'com.huntington',
   org: 'Huntington National Bank',
+  
+  loginFields: [
+    {'label': 'User ID/Username', 'type': 'text', 'key': 'username'},
+    {'label': 'PIN/Password', 'type': 'password', 'key': 'password'}
+  ],
 
   actions: {
     main: function() {

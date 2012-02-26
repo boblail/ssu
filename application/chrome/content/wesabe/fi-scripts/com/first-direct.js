@@ -1,6 +1,12 @@
 wesabe.download.Player.register({
   fid: 'com.first-direct',
   org: 'First Direct (UK)',
+  
+  loginFields: [
+    {'label': 'Username', 'type': 'text', 'key': 'username'},
+    {'label': 'Electronic Password', 'type': 'password', 'key': 'password'},
+    {'label': 'Memorable Answer', 'type': 'password', 'key': 'memorable'}
+  ],
 
   dispatchFrames: false,
   afterDownload: 'nextAccount',

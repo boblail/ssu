@@ -1,6 +1,12 @@
 wesabe.download.Player.register
   fid: 'com.bankofamerica'
   org: 'Bank of America'
+  
+  loginFields: [
+    {'label': 'Online ID', 'type': 'text', 'key': 'username'}
+    {'label': 'Passcode', 'type': 'password', 'key': 'password'}
+    {'label': 'State', 'type': 'state', 'key': 'state'}
+  ]
 
   dispatchFrames: false
   afterDownload: 'nextAccount'

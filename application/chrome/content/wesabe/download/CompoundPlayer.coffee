@@ -6,6 +6,7 @@ class CompoundPlayer extends Player
     class klass extends this
       @fid: params.fid
       @org: params.org
+      @loginFields: params.loginFields
 
     callback? klass
 
