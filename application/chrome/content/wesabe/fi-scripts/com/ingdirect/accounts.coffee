@@ -72,7 +72,7 @@ wesabe.provide "fi-scripts.com.ingdirect.accounts",
     ]
 
     downloadButton: [
-      '//a[@name="download"][contains(string(.), "Download")]'
+      '//a[@title="Continue"][contains(string(.), "Continue")]'
     ]
 
     # which account (hidden field), should default to ALL, but doesn't always happen
